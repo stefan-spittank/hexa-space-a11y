@@ -18,6 +18,7 @@ export const Ship = ({
 }) => {
     const [numberOfRates, setNumberOfRates] = useState(DEFAULT_NUM_OF_MONTH);
     const availabilityClass = ship.inStock > 0 ? (ship.inStock > 5 ? "bg-green-500" : "bg-yellow-500") : "bg-red-500";
+    const availabilityLabel = ship.inStock > 0 ? (ship.inStock > 5 ? "In Stock" : "Limited Stock") : "Out of Stock";
     return (
         <>
             <div className="flex flex-col gap-4 p-6 bg-gray-100 rounded text-gray-800 shadow-sm items-center">
@@ -42,33 +43,32 @@ export const Ship = ({
                             </div>
                         )}
                         <div className="flex flex-col">
-                            <b>Availability:</b><span
-                            className={'border border-gray-500 rounded-3xl w-[24px] h-[24px] ' + availabilityClass}/>
+                            <b>Availability:</b>
+                            <span className={'border border-gray-500 rounded-3xl w-[24px] h-[24px] ' + availabilityClass}/>
+                            <span>{ availabilityLabel }</span>
                         </div>
                         <div className="flex flex-col">
                             <b>Price:</b><span data-testid="ship-price">{ship.price}</span>
                         </div>
                         <div className="flex flex-col">
                             <b>Monthly Rate:</b>
-                            <span>
-              {monthlyRate(ship, numberOfRates).toFixed(2)}
-            </span>
-            </div>
-            <div>
-              <Rates
-                  numberOfRates={numberOfRates}
-                  setNumberOfRates={setNumberOfRates}
-              />
-              <div>Pay in {numberOfRates} Rates</div>
-            </div>
-            <div className="flex justify-end">
-                <button onClick={() => addToCart(ship.id)} disabled={isShipInCart(ship.id)}>
-                    <img src={isShipInCart(ship.id) ? "/images/cartAdded.png" : "/images/cart.png"}/>
-                </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+                            <span>{monthlyRate(ship, numberOfRates).toFixed(2)}</span>
+                        </div>
+                        <div>
+                          <Rates
+                              numberOfRates={numberOfRates}
+                              setNumberOfRates={setNumberOfRates}
+                          />
+                        <div>Pay in {numberOfRates} Rates</div>
+                        </div>
+                        <div className="flex justify-end">
+                            <button onClick={() => addToCart(ship.id)} disabled={isShipInCart(ship.id)}>
+                              <img src={isShipInCart(ship.id) ? "/images/cartAdded.png" : "/images/cart.png"}/>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </>
   );
 };
