@@ -1,20 +1,27 @@
 'use client';
 
-import {useState} from "react";
+import {FormEvent, useState} from "react";
 
 const Search = ({executeSearch} : {executeSearch: (searchTerm: string) => void}) => {
     const [searchTerm, setSearchTerm] = useState("");
 
+    const onSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        executeSearch(searchTerm);
+    }
+
     return (
         <>
-            <div className="flex gap-2 my-4 items-center justify-center w-[450px]">
+            <form className="flex gap-2 my-4 items-center justify-center w-[450px]" onSubmit={onSubmit}>
                 <input type="text" placeholder="Search" onChange={(e) => setSearchTerm(e.target.value)}
                        className="p-2 w-[300px] border border-gray-200 grow-1"/>
                 <div>
-                    <img src="/images/search.png" onClick={() => executeSearch(searchTerm)}
-                         className="cursor-pointer"/>
+                    <button type="submit">
+                        <img src="/images/search.png" />
+                    </button>
+
                 </div>
-            </div>
+            </form>
         </>);
 }
 
