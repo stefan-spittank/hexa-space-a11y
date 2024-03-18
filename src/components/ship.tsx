@@ -20,7 +20,7 @@ export const Ship = ({
     const availabilityClass = ship.inStock > 0 ? (ship.inStock > 5 ? "bg-green-500" : "bg-yellow-500") : "bg-red-500";
     return (
         <>
-            <div className="flex flex-col gap-4 p-6 bg-gray-100 rounded text-[#858585] shadow-sm items-center">
+            <div className="flex flex-col gap-4 p-6 bg-gray-100 rounded text-gray-800 shadow-sm items-center">
                 <p className="text-2xl">{ship.name}</p>
                 <div className="flex flex-row gap-4">
                     <Image
